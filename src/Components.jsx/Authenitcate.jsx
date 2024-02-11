@@ -1,7 +1,6 @@
-// Authenticate.jsx
 import React, { useState } from 'react';
 
-function Authenticate({ token }) { // Deconstruct token from props
+function Authenticate({ token }) {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
 
@@ -11,19 +10,21 @@ function Authenticate({ token }) { // Deconstruct token from props
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Use token in the Authorization header
+          'Authorization': `Bearer ${token}`,
         },
       });
+  
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.message || 'Failed to authenticate');
       }
-
-      setSuccessMessage(data.message); // Store the success message
+  
+      setSuccessMessage(data.message);
     } catch (error) {
       setError(error.message);
     }
   }
+  
 
   return (
     <div>
